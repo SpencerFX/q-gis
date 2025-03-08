@@ -1,6 +1,4 @@
-// Function to compute distance between two lat/lon points in km
-// Example: Distance between San Francisco and Los Angeles
-// haversine[37.7749; -122.4194; 34.0522; -118.2437]
+// Since KDB+ provides the atan function, we can use it to approximate atan2 like this:
 atan2:{[y;x]
   $[x>0; atan y%x;
     x<0 & y>=0; atan y%x + acos -1;
@@ -10,6 +8,9 @@ atan2:{[y;x]
     0N]  / Return null if x=y=0 (undefined case)
  };
 
+// Function to compute distance between two lat/lon points in km
+// Example: Distance between San Francisco and Los Angeles
+// haversine[37.7749; -122.4194; 34.0522; -118.2437]
 haversine:{[lat1; lon1; lat2; lon2]
     R:6371; / Radius of Earth in km
     dlat:(lat2-lat1)*acos -1%180; / Convert degrees to radians
